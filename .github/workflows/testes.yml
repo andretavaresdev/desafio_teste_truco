@@ -1,0 +1,20 @@
+name: Testes Jest
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Instalar dependências
+        run: npm ci
+      - name: Executar testes
+        run: npm test -- --runInBand --ci
